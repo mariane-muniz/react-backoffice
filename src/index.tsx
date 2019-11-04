@@ -30,7 +30,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={App} />
-      <Route path="/tab" component={App} />
+      <Route path="/tab" component={Tab} />
     </Switch>
   </BrowserRouter>
   , document.getElementById('app'));
