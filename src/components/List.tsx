@@ -172,7 +172,7 @@ export class List extends React.Component<{}, IDetailsListDocumentsExampleState>
             selectionDetails: this._getSelectionDetails(),
             isModalSelection: false,
             isCompactMode: false,
-            announcedMessage: undefined
+            announcedMessage: undefined,
         };
     }
 
@@ -233,9 +233,9 @@ export class List extends React.Component<{}, IDetailsListDocumentsExampleState>
             .then(res => res.json())
             .then(
                 (result: any) => {
-                    this.setState({
-                        isLoaded: true
-                    });
+
+                    console.log(result);
+
                 }
             )
     }
