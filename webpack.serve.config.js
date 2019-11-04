@@ -7,7 +7,7 @@ module.exports = webpackMerge(
   {
     // Here you can custom webpack configurations
     output: {
-      publicPath: '/'
+      publicPath: '/',
     }
   }
 );

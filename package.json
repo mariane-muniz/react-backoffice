@@ -13,9 +13,14 @@
     "gen": "npx plop"
   },
   "dependencies": {
+    "@microsoft/sp-office-ui-fabric-core": "^1.9.1",
+    "@types/react-router": "^5.1.2",
+    "@types/react-router-dom": "^5.1.1",
+    "office-ui-fabric-react": "^7.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "office-ui-fabric-react": "^7.0.0"
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "just-stack-react": "^1.0.0",

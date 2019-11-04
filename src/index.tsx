@@ -1,7 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './App';
+
+/* UI Fabric imports */
 import { mergeStyles } from 'office-ui-fabric-react';
+import { initializeIcons } from '@uifabric/icons';
+
+/* SRC imports */
+import './styles/css/index.css';
+import { App } from './App';
+
+/* Router import */
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Tab } from './components/Tab'; 
+
+initializeIcons();
 
 // Inject some global styles
 mergeStyles({
@@ -14,4 +26,11 @@ mergeStyles({
   }
 });
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <BrowserRouter>
+    <Switch>
+      <Route path="/" exact component={App} />
+      <Route path="/tab" component={App} />
+    </Switch>
+  </BrowserRouter>
+  , document.getElementById('app'));
