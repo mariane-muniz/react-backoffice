@@ -13,7 +13,7 @@ export class HorizontalNav extends React.Component<any, any> {
                     <li><a href="#">Relatórios</a></li>
                     <li><a href="#">Pedidos</a></li>
                 </ul>
-                <a href="#">Logoff</a>
+                <a id="logoff" href="#">Logoff</a>
             </div>
         );
     }

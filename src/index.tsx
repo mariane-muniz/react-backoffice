@@ -7,11 +7,12 @@ import { initializeIcons } from '@uifabric/icons';
 
 /* SRC imports */
 import './styles/css/index.css';
-import { App } from './App';
+import { ListPage } from './pages/ListPage';
 
 /* Router import */
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Tab } from './components/Tab'; 
+import { TabPage } from './pages/TabPage'; 
+import DashboardPage from './pages/DashboardPage';
 
 initializeIcons();
 
@@ -29,8 +30,9 @@ mergeStyles({
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={App} />
-      <Route path="/tab" component={Tab} />
+      <Route path="/" exact component={DashboardPage} />
+      <Route path="/list" component={ListPage} />
+      <Route path="/tab" component={TabPage} />
     </Switch>
   </BrowserRouter>
   , document.getElementById('app'));

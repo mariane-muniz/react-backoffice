@@ -3,74 +3,12 @@ import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
 import { Announced } from 'office-ui-fabric-react/lib/Announced';
 import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode, IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { MarqueeSelection } from 'office-ui-fabric-react/lib/MarqueeSelection';
-import { mergeStyleSets } from 'office-ui-fabric-react/lib/Styling';
+import NavbarComponent from '../../components/NavbarComponent';
+import { ClassNames } from './ClassNames';
+import { IDocument } from './IDocument';
+import { IDetailsListDocumentsExampleState } from './IDetailsListDocumentsExampleState';
 
-const classNames = mergeStyleSets({
-    fileIconHeaderIcon: {
-        padding: 0,
-        fontSize: '16px'
-    },
-    fileIconCell: {
-        textAlign: 'center',
-        selectors: {
-            '&:before': {
-                content: '.',
-                display: 'inline-block',
-                verticalAlign: 'middle',
-                height: '100%',
-                width: '0px',
-                visibility: 'hidden'
-            }
-        }
-    },
-    fileIconImg: {
-        verticalAlign: 'middle',
-        maxHeight: '16px',
-        maxWidth: '16px'
-    },
-    controlWrapper: {
-        display: 'flex',
-        flexWrap: 'wrap'
-    },
-    exampleToggle: {
-        display: 'inline-block',
-        marginBottom: '10px',
-        marginRight: '30px'
-    },
-    selectionDetails: {
-        marginBottom: '20px'
-    }
-});
-const controlStyles = {
-    root: {
-        margin: '0 30px 20px 0',
-        maxWidth: '300px'
-    }
-};
-
-export interface IDetailsListDocumentsExampleState {
-    columns: IColumn[];
-    items: IDocument[];
-    selectionDetails: string;
-    isModalSelection: boolean;
-    isCompactMode: boolean;
-    announcedMessage?: string;
-}
-
-export interface IDocument {
-    key: string;
-    name: string;
-    value: string;
-    iconName: string;
-    fileType: string;
-    modifiedBy: string;
-    dateModified: string;
-    dateModifiedValue: number;
-    fileSize: string;
-    fileSizeRaw: number;
-}
-
-export class List extends React.Component<{}, IDetailsListDocumentsExampleState> {
+export class ListFragment extends React.Component<{}, IDetailsListDocumentsExampleState> {
 
     private _selection: Selection;
     private _allItems: IDocument[];
@@ -84,8 +22,8 @@ export class List extends React.Component<{}, IDetailsListDocumentsExampleState>
             {
                 key: 'column1',
                 name: 'File Type',
-                className: classNames.fileIconCell,
-                iconClassName: classNames.fileIconHeaderIcon,
+                className: ClassNames.fileIconCell,
+                iconClassName: ClassNames.fileIconHeaderIcon,
                 ariaLabel: 'Column operations for File type, Press to sort on File type',
                 iconName: 'Page',
                 isIconOnly: true,
@@ -94,15 +32,14 @@ export class List extends React.Component<{}, IDetailsListDocumentsExampleState>
                 maxWidth: 16,
                 onColumnClick: this._onColumnClick,
                 onRender: (item: IDocument) => {
-                    return <img src={item.iconName} className={classNames.fileIconImg} alt={item.fileType + ' file icon'} />;
+                    return <img src={item.iconName} className={ClassNames.fileIconImg} alt={item.fileType + ' file icon'} />;
                 }
             },
             {
                 key: 'column2',
                 name: 'Name',
                 fieldName: 'name',
-                minWidth: 210,
-                maxWidth: 350,
+                minWidth: 0,
                 isRowHeader: true,
                 isResizable: true,
                 isSorted: true,
@@ -183,6 +120,7 @@ export class List extends React.Component<{}, IDetailsListDocumentsExampleState>
             <div id="horizontal-nav" className="ms-Grid-col ms-sm12 bottom-border-gray bg-white p-0">
                 <div className="ms-Grid-col ms-sm6 ms-md8 ms-lg12 ms-bgColor-gray10 full-height p-0">
                     <div className="ms-Grid-col ms-sm12 p-0">
+                        <NavbarComponent />
                         <div className="bg-white p-3">
                             <Fabric>
                                 {announcedMessage ? <Announced message={announcedMessage} /> : undefined}
@@ -311,31 +249,31 @@ function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boo
 }
 
 function _generateDocuments() {
-    const items: IDocument[] = [];
-    for (let i = 0; i < 500; i++) {
-        const randomDate = _randomDate(new Date(2012, 0, 1), new Date());
-        const randomFileSize = _randomFileSize();
-        const randomFileType = _randomFileIcon();
-        let fileName = _lorem(2);
-        fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1).concat(`.${randomFileType.docType}`);
-        let userName = _lorem(2);
-        userName = userName
-            .split(' ')
-            .map((name: string) => name.charAt(0).toUpperCase() + name.slice(1))
-            .join(' ');
-        items.push({
-            key: i.toString(),
-            name: fileName,
-            value: fileName,
-            iconName: randomFileType.url,
-            fileType: randomFileType.docType,
-            modifiedBy: userName,
-            dateModified: randomDate.dateFormatted,
-            dateModifiedValue: randomDate.value,
-            fileSize: randomFileSize.value,
-            fileSizeRaw: randomFileSize.rawSize
-        });
-    }
+    const items: IDocument[] = []; 
+    // for (let i = 0; i < 500; i++) {
+    //     const randomDate = _randomDate(new Date(2012, 0, 1), new Date());
+    //     const randomFileSize = _randomFileSize();
+    //     const randomFileType = _randomFileIcon();
+    //     let fileName = _lorem(2);
+    //     fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1).concat(`.${randomFileType.docType}`);
+    //     let userName = _lorem(2);
+    //     userName = userName
+    //         .split(' ')
+    //         .map((name: string) => name.charAt(0).toUpperCase() + name.slice(1))
+    //         .join(' ');
+    //     items.push({
+    //         key: i.toString(),
+    //         name: fileName,
+    //         value: fileName,
+    //         iconName: randomFileType.url,
+    //         fileType: randomFileType.docType,
+    //         modifiedBy: userName,
+    //         dateModified: randomDate.dateFormatted,
+    //         dateModifiedValue: randomDate.value,
+    //         fileSize: randomFileSize.value,
+    //         fileSizeRaw: randomFileSize.rawSize
+    //     });
+    // }
     return items;
 }
 

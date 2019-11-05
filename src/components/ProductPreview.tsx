@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComboBoxBasicExample } from './ComboBoxBasicExample';
 import { ComboBox, SelectableOptionMenuItemType, IComboBoxOption } from 'office-ui-fabric-react';
 
 export default class ProductPreview extends React.Component<any, any> {

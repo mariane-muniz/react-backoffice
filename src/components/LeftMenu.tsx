@@ -7,14 +7,6 @@ export class LeftMenu extends React.Component<any, any> {
     render() {
         return (
             <div className="ms-Grid-col ms-sm6 ms-md4 ms-lg2 full-height right-border-gray p-3" id="left-menu">
-
-                {/* <Link to="tab">
-                    tab
-                </Link>
-                <Link to="/">
-                    home
-                </Link> */}
-
                 <Nav
                     ariaLabel="Nav example with nested links"
                     groups={[
@@ -28,8 +20,8 @@ export class LeftMenu extends React.Component<any, any> {
                                     collapseAriaLabel: 'Collapse Parent link 1',
                                     links: [
                                         {
-                                            name: 'Novo produto',
-                                            url: '/tab',
+                                            name: 'Lista de produtos',
+                                            url: '/list',
                                             target: ''
                                         },
                                         {

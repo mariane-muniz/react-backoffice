@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class BreadCrumb extends React.Component {
+export default class BreadCrumbFragment extends React.Component {
 
     render() {
         return (
