@@ -11,12 +11,9 @@ import { IDetailsListDocumentsExampleState } from './IDetailsListDocumentsExampl
 export class ListFragment extends React.Component<{}, IDetailsListDocumentsExampleState> {
 
     private _selection: Selection;
-    private _allItems: IDocument[];
 
     constructor(props: {}) {
         super(props);
-
-        this._allItems = _generateDocuments();
 
         const columns: IColumn[] = [
             {
@@ -104,7 +101,7 @@ export class ListFragment extends React.Component<{}, IDetailsListDocumentsExamp
         });
 
         this.state = {
-            items: this._allItems,
+            items: [],
             columns: columns,
             selectionDetails: this._getSelectionDetails(),
             isModalSelection: false,
@@ -167,15 +164,17 @@ export class ListFragment extends React.Component<{}, IDetailsListDocumentsExamp
 
     public componentDidMount() {
 
-        fetch("https://app-backend-content.herokuapp.com/list/product?attribute=name")
+        // fetch("https://app-backend-content.herokuapp.com/list/product?attribute=name")
+        fetch("http://localhost:8080/list/product?attribute=name")
             .then(res => res.json())
             .then(
                 (result: any) => {
-
-                    console.log(result);
-
+                    this.setState({
+                        'columns': result.columns,
+                        'items': result.values
+                    });
                 }
-            )
+            );
     }
 
     public componentDidUpdate(previousProps: any, previousState: IDetailsListDocumentsExampleState) {
@@ -198,7 +197,7 @@ export class ListFragment extends React.Component<{}, IDetailsListDocumentsExamp
 
     private _onChangeText = (ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, text: string): void => {
         this.setState({
-            items: text ? this._allItems.filter(i => i.name.toLowerCase().indexOf(text) > -1) : this._allItems
+            items: []
         });
     };
 
@@ -246,77 +245,6 @@ export class ListFragment extends React.Component<{}, IDetailsListDocumentsExamp
 function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boolean): T[] {
     const key = columnKey as keyof T;
     return items.slice(0).sort((a: T, b: T) => ((isSortedDescending ? a[key] < b[key] : a[key] > b[key]) ? 1 : -1));
-}
-
-function _generateDocuments() {
-    const items: IDocument[] = []; 
-    // for (let i = 0; i < 500; i++) {
-    //     const randomDate = _randomDate(new Date(2012, 0, 1), new Date());
-    //     const randomFileSize = _randomFileSize();
-    //     const randomFileType = _randomFileIcon();
-    //     let fileName = _lorem(2);
-    //     fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1).concat(`.${randomFileType.docType}`);
-    //     let userName = _lorem(2);
-    //     userName = userName
-    //         .split(' ')
-    //         .map((name: string) => name.charAt(0).toUpperCase() + name.slice(1))
-    //         .join(' ');
-    //     items.push({
-    //         key: i.toString(),
-    //         name: fileName,
-    //         value: fileName,
-    //         iconName: randomFileType.url,
-    //         fileType: randomFileType.docType,
-    //         modifiedBy: userName,
-    //         dateModified: randomDate.dateFormatted,
-    //         dateModifiedValue: randomDate.value,
-    //         fileSize: randomFileSize.value,
-    //         fileSizeRaw: randomFileSize.rawSize
-    //     });
-    // }
-    return items;
-}
-
-function _randomDate(start: Date, end: Date): { value: number; dateFormatted: string } {
-    const date: Date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-    return {
-        value: date.valueOf(),
-        dateFormatted: date.toLocaleDateString()
-    };
-}
-
-const FILE_ICONS: { name: string }[] = [
-    { name: 'accdb' },
-    { name: 'csv' },
-    { name: 'docx' },
-    { name: 'dotx' },
-    { name: 'mpt' },
-    { name: 'odt' },
-    { name: 'one' },
-    { name: 'onepkg' },
-    { name: 'onetoc' },
-    { name: 'pptx' },
-    { name: 'pub' },
-    { name: 'vsdx' },
-    { name: 'xls' },
-    { name: 'xlsx' },
-    { name: 'xsn' }
-];
-
-function _randomFileIcon(): { docType: string; url: string } {
-    const docType: string = FILE_ICONS[Math.floor(Math.random() * FILE_ICONS.length)].name;
-    return {
-        docType,
-        url: `https://static2.sharepointonline.com/files/fabric/assets/brand-icons/document/svg/${docType}_16x1.svg`
-    };
-}
-
-function _randomFileSize(): { value: string; rawSize: number } {
-    const fileSize: number = Math.floor(Math.random() * 100) + 30;
-    return {
-        value: `${fileSize} KB`,
-        rawSize: fileSize
-    };
 }
 
 const LOREM_IPSUM = (
