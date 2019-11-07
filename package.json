@@ -23,7 +23,10 @@
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
-    "just-stack-react": "^1.0.0",
-    "just-scripts": "^0.27.0"
-  }
+    "gh-pages": "^2.1.1",
+    "just-scripts": "^0.27.0",
+    "just-stack-react": "^1.0.0"
+  },
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
 }
