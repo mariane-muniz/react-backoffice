@@ -164,8 +164,8 @@ export class ListFragment extends React.Component<{}, IDetailsListDocumentsExamp
 
     public componentDidMount() {
 
-        // fetch("https://app-backend-content.herokuapp.com/list/product?attribute=name")
-        fetch("http://localhost:8080/list/product?attribute=name")
+        fetch("https://app-backend-content.herokuapp.com/list/product?attribute=name")
+        // fetch("http://localhost:8080/list/product?attribute=name")
             .then(res => res.json())
             .then(
                 (result: any) => {
